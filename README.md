@@ -24,6 +24,7 @@ and so on.
 
 The same test builds correctly with NVCC from CUDA 13.2.
 
+
 ## Instructions to reproduce
 
 ```bash
@@ -32,6 +33,32 @@ cd nvidia_bug_6302392
 make
 ```
 will clone Abseil, build it (requires CMake), and try to compile the test program with CUDA 13.2 and CUDA 13.3.
+
+
+## Simplified reproducer
+
+The same error manifest in a simplified reproducer:
+```c++
+template <typename T>
+struct trait {
+  template <typename U>
+  using type_t = U;
+};
+
+template <typename T>
+class Test {
+  using type_t = trait<int>::type_t<T>;
+};
+```
+
+Compiling this with nvcc 13.2 works, while nvcc 13.3 fails with the error
+```
+test.cu:9:48: error: using template type parameter 'trait<int>::type_t<U>' after 'typename'
+    9 |   using type_t = trait<int>::type_t<T>;
+      |
+```
+
+Link to the simplified reproducer on Godbolt: https://cuda.godbolt.org/z/1rWfc64nM .
 
 ## Details
 
