@@ -2,6 +2,11 @@
 
 [NVIDIA bug 6302392](https://developer.nvidia.com/bugs/6302392)
 
+## Status
+
+Confirmed in CUDA 13.3, expected to be fixed in CUDA 13.4.
+
+
 ## Description
 
 Building a source file that uses Abseil's `"absl/container/flat_hash_map.h"` with NVCC from CUDA 13.3.0 fails with
