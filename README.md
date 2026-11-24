@@ -4,7 +4,7 @@
 
 ## Status
 
-Confirmed in CUDA 13.3, expected to be fixed in CUDA 13.4.
+Fixed in CUDA 13.4.
 
 
 ## Description
